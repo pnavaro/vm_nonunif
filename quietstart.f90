@@ -19,7 +19,7 @@ miroir = 0.d0
 deci = n
 
 if (deci > 33554432) then 
-   print*,'entier trop grand (superieur a 33554432=2**25)'
+   print*,'too big > 33554432=2**25'
    stop
 else 
    do while (k >= 0)
@@ -50,7 +50,7 @@ miroir = 0.d0
 deci = n
 
 if (deci > 43046721) then 
-   print*,'entier trop grand (superieur a 43046721=3**16)'
+   print*,' too big > 43046721=3**16 '
    stop
 else 
    do while (k >= 0)
@@ -85,7 +85,7 @@ miroir = 0.d0
 deci = n
 
 if (deci > 48828125) then 
-   print*,'entier trop grand (superieur a 48828125=5**11)'
+   print*,'too big > 48828125=5**11'
    stop
 else 
    do while (k >= 0)
