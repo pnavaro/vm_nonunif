@@ -1,0 +1,4 @@
+gfortran
+gnuplot
+libhdf5-dev
+cmake
