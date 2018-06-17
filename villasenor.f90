@@ -14,7 +14,7 @@ contains
 subroutine calcul_j_villa( ele, tm )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 real(kind=prec) :: x1, y1, x2, y2, xint, yint
 integer :: i1, j1, i2, j2, iint, jint
 
@@ -153,7 +153,7 @@ end subroutine calcul_j_villa
 subroutine quatre_frontieres(i1,j1,xold,yold,xnew,ynew,tm,ele)
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 integer :: i1, j1
 real(kind = prec):: xold,yold,xnew,ynew
 real(kind = prec) :: Jx1,Jx2,Jy1,Jy2,dum
@@ -188,7 +188,7 @@ end subroutine quatre_frontieres
 subroutine sept_frontieres( i1, j1, i2, j2, x1, y1, x2, y2, tm, ele )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 integer :: i2, j2, i1, j1
 real(kind = prec) :: x1, y1, x2, y2
 real(kind = prec) :: xinter, yinter
@@ -230,7 +230,7 @@ end subroutine sept_frontieres
 subroutine dix_frontieres( i1, j1, i2, j2, x1, y1, x2, y2, tm, ele ) 
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 real(kind=prec) :: x2, y2, x1, y1, xinter, yinter
 integer :: i2, j2, jinter
 integer :: i1, j1
@@ -322,7 +322,7 @@ end subroutine dix_frontieres
 subroutine quatre_frontieres_period(i1,j1,xold,yold,xnew,ynew,tm,ele)
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 integer :: i1,j1
 real(kind = prec):: xold,yold,xnew,ynew
 real(kind = prec) :: Jx1,Jx2,Jy1,Jy2,dum
@@ -357,7 +357,7 @@ end subroutine quatre_frontieres_period
 subroutine sept_frontieres_period(i1, j1, i2, j2, x1, y1, x2, y2, tm, ele)
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 integer :: i1, j1, i2, j2
 real(kind = prec) :: x1, y1, x2, y2
 real(kind = prec) :: xinter,yinter
@@ -399,7 +399,7 @@ end subroutine sept_frontieres_period
 subroutine dix_frontieres_period( i1, j1, i2, j2, x1, y1, x2, y2, tm, ele )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 real(kind=prec) :: x2, y2, x1, y1, xinter, yinter
 integer :: i2, j2, jinter
 integer :: i1, j1

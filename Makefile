@@ -1,10 +1,10 @@
 PROG =	VM.exe
 
 SRCS =	zone.f90 initialisation.f90 quietstart.f90 particules.f90 \
-	poisson.f90 villasenor.f90 maxwell.f90 diagno.f90 main.f90
+	villasenor.f90 maxwell.f90 diagno.f90 main.f90
 
 OBJS =	zone.o initialisation.o quietstart.o particules.o \
-	poisson.o villasenor.o maxwell.o diagno.o main.o
+	villasenor.o maxwell.o diagno.o main.o
 
 LIBS =	-llapack
 
@@ -18,7 +18,7 @@ $(PROG): $(OBJS)
 	$(F90) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
 
 clean:
-	rm -f $(PROG) $(OBJS) *.mod fort.* 
+	rm -f $(PROG) $(OBJS) *.mod fort.* *.gnu
 
 debug:	
 	make F90FLAGS=-g FFLAGS=-g
@@ -37,7 +37,6 @@ main.o : main.f90 initialisation.o particules.o villasenor.o \
 initialisation.o : initialisation.f90 zone.o
 particules.o : particules.f90 quietstart.o zone.o
 quietstart.o : quietstart.f90 zone.o
-poisson.o : poisson.f90 zone.o
 villasenor.o : villasenor.f90 zone.o
 maxwell.o : maxwell.f90 zone.o
 diagno.o : diagno.f90 zone.o

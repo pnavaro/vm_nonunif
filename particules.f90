@@ -28,7 +28,7 @@ end subroutine creapa
 subroutine interpol_eb( tm1, ele )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm1
+type(mesh_fields) :: tm1
 real(kind = prec) :: a1, a2, a3, a4
 real(kind = prec) :: xp, yp, dum
 !   ______________
@@ -230,7 +230,7 @@ end subroutine sortie_part
 subroutine calcul_rho( ele, tm )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 real(kind=prec) :: a1, a2, a3, a4, dum, xp, yp
 real(kind=prec) :: rho_total
 
@@ -292,7 +292,7 @@ end subroutine calcul_rho
 subroutine calcul_j_cic( ele, tm )
 
 type(particle) :: ele
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 real(kind=prec) :: a1, a2, a3, a4, dum, xp, yp
 real(kind=prec), dimension(0:nx,0:ny) :: jx, jy
 

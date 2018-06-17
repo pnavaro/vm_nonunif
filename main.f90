@@ -3,14 +3,13 @@ program VM_non_unif_2D
 use zone
 use particules
 use initialisation
-use poisson
 use villasenor
 use maxwell
 use diagno
 
 implicit none
 
-type(tm_mesh_fields) :: f0, f1
+type(mesh_fields) :: f0, f1
 type(particle) :: p
 
 real(kind=prec) :: time
@@ -19,7 +18,7 @@ integer :: iargc, n, i
 character(len=72) :: argv
 
 n = iargc()
-if (n == 0) stop 'Usage: ./VM.exe fichier-de-donnees'
+if (n == 0) stop 'Usage: ./VM.exe data file'
 do i = 1, n
    call getarg( i, argv); write(*,'(i2, 1x, a)') i, argv
 end do
@@ -89,14 +88,13 @@ do istep = 1, nstep
 
    if ( istep==1 .or. mod(istep,idiag) == 0 .or. istep==nstep ) then
       iplot = iplot + 1
-      if (nomcas=='viry__') call plot_part( p, time, iplot )
      ! call diag_coc( f0, p, time, iplot )
      ! call diag_champ_part( p, time, iplot )
-     !call plot_champ( f0, iplot, time )
-      call plot_phases( p, iplot, time )
+     ! call plot_champ( f0, iplot, time )
+     ! call plot_phases( p, iplot, time )
      ! call distribution_v( p, iplot, time )  
      ! call distribution_x( p, iplot, time )
-      if (nomcas == 'plasma') call modeE( f0, iplot, time )
+      call modeE( f0, iplot, time )
    endif
 
 end do

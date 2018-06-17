@@ -14,7 +14,7 @@ contains
 
 subroutine init( tm )
 
-type (tm_mesh_fields) :: tm
+type (mesh_fields) :: tm
 real(kind=prec) :: time, aux1, aux2
 
 select case (nomcas)

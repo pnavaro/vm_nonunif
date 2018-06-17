@@ -15,7 +15,7 @@ contains
 
 subroutine faraday( tm )
 
-type( tm_mesh_fields ) :: tm
+type( mesh_fields ) :: tm
 
    !*** On utilise l'equation de Faraday sur un demi pas
    !*** de temps pour le calcul du champ magnetique  Bz 
@@ -36,7 +36,7 @@ end subroutine faraday
 
 subroutine ampere( tm )
 
-type( tm_mesh_fields ) :: tm
+type( mesh_fields ) :: tm
 
    !*** Calcul du champ electrique E au temps n+1
    !*** sur les points internes du maillage
@@ -63,7 +63,7 @@ end subroutine ampere
 
 subroutine conditions_limites( tm, time )
 
-type( tm_mesh_fields ) :: tm
+type( mesh_fields ) :: tm
 real(kind=prec) :: a11,a12,a21,a22,b1,b2,dis
 real(kind=prec) :: time, alpha, omega
 integer :: mm=1 !parametre du cas entran
@@ -387,7 +387,7 @@ end subroutine conditions_limites
 
 subroutine decalage( tm, tm1 )
 
-type(tm_mesh_fields) :: tm, tm1
+type(mesh_fields) :: tm, tm1
 
 !*** Calcul des composantes des champs 
 !*** sur les noeuds du maillage de rho

@@ -2,12 +2,12 @@ module zone
 
 integer, parameter :: prec=8
 
-type tm_mesh_fields
+type mesh_fields
    real(kind=prec), dimension(:,:), pointer :: ex, ey
    real(kind=prec), dimension(:,:), pointer :: bz
    real(kind=prec), dimension(:,:), pointer :: r0, r1
    real(kind=prec), dimension(:,:), pointer :: jx, jy
-end type tm_mesh_fields
+end type mesh_fields
 
 type particle
    real(kind=prec)   , pointer :: pos(:,:)
@@ -59,7 +59,7 @@ subroutine readin( tm, filename )
 implicit none
 
 character(len=*) :: filename
-type(tm_mesh_fields) :: tm
+type(mesh_fields) :: tm
 
 namelist/donnees/ dimx,  &      !dimensions du domaine
                   dimy,  & 
