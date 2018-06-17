@@ -1,9 +1,9 @@
 PROG =	VM.exe
 
-SRCS =	zone.f90 initialisation.f90 kiss.f90 quietstart.f90 particules.f90 \
+SRCS =	zone.f90 initialisation.f90 quietstart.f90 particules.f90 \
 	poisson.f90 villasenor.f90 maxwell.f90 diagno.f90 main.f90
 
-OBJS =	zone.o initialisation.o kiss.o quietstart.o particules.o \
+OBJS =	zone.o initialisation.o quietstart.o particules.o \
 	poisson.o villasenor.o maxwell.o diagno.o main.o
 
 LIBS =	-llapack
@@ -35,7 +35,7 @@ debug:
 main.o : main.f90 initialisation.o particules.o villasenor.o \
 	maxwell.o diagno.o zone.o 
 initialisation.o : initialisation.f90 zone.o
-particules.o : particules.f90 kiss.o quietstart.o zone.o
+particules.o : particules.f90 quietstart.o zone.o
 quietstart.o : quietstart.f90 zone.o
 poisson.o : poisson.f90 zone.o
 villasenor.o : villasenor.f90 zone.o
