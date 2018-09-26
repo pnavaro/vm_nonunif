@@ -1,6 +1,6 @@
-# vm_nonunif
+# Vlasov-Maxwell PIC solver 
 
-Vlasov-Maxwell PIC solver in 2 dimensions with non uniform cartesian mesh
+2 dimensions with non uniform cartesian mesh
 
 type make and run
 
