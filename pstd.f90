@@ -1,7 +1,4 @@
-
-
 module pstd
-
 
 use, intrinsic :: iso_c_binding
 
@@ -12,8 +9,8 @@ include 'fftw3.f03'
 type :: maxwell_pstd
 
    private
-   integer           :: nc_eta1      !< x cells number
-   integer           :: nc_eta2      !< y cells number
+   integer          :: nc_eta1      !< x cells number
+   integer          :: nc_eta2      !< y cells number
    real(8)          :: eta1_min     !< left side
    real(8)          :: eta1_max     !< right side
    real(8)          :: delta_eta1   !< step size
@@ -24,12 +21,12 @@ type :: maxwell_pstd
    real(8), pointer :: d_dy(:)      !< field y derivative
    real(8), pointer :: kx(:)        !< x wave number
    real(8), pointer :: ky(:)        !< y wave number
-   integer(8)      :: fwx          !< forward fft plan along x
-   integer(8)      :: fwy          !< forward fft plan along y
-   integer(8)      :: bwx          !< backward fft plan along x
-   integer(8)      :: bwy          !< backward fft plan along y
-   double complex, pointer :: tmp_x(:)     !< x fft transform
-   double complex, pointer :: tmp_y(:)     !< y fft transform
+   integer(8)       :: fwx          !< forward fft plan along x
+   integer(8)       :: fwy          !< forward fft plan along y
+   integer(8)       :: bwx          !< backward fft plan along x
+   integer(8)       :: bwy          !< backward fft plan along y
+   complex(8), pointer :: tmp_x(:) !< x fft transform
+   complex(8), pointer :: tmp_y(:) !< y fft transform
 
 end type maxwell_pstd
 
