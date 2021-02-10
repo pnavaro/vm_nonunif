@@ -93,15 +93,15 @@ end do
 
 end subroutine avancee_part
 
-subroutine calcul_j_cic( ele, tm, tm1 )
+subroutine calcul_j_cic( ele, tm )
 
 type(particle) :: ele
-type(mesh_fields) :: tm, tm1
+type(mesh_fields) :: tm
 real(kind=prec) :: a1, a2, a3, a4, dum, xp, yp
 integer :: ip1, jp1
 
-tm1%jx = 0.d0
-tm1%jy = 0.d0
+tm%jx = 0.d0
+tm%jy = 0.d0
 
 do ipart=1,nbpart
    i = ele%case(ipart,1)
@@ -118,38 +118,26 @@ do ipart=1,nbpart
    ip1 = mod(i+1,nx)
    jp1 = mod(j+1,ny)
 
-   tm1%jx(i,j)     = tm1%jx(i,j)     + a1*dum  
-   tm1%jx(ip1,j)   = tm1%jx(ip1,j)   + a2*dum 
-   tm1%jx(ip1,jp1) = tm1%jx(ip1,jp1) + a3*dum 
-   tm1%jx(i,jp1)   = tm1%jx(i,jp1)   + a4*dum 
+   tm%jx(i,j)     = tm%jx(i,j)     + a1*dum  
+   tm%jx(ip1,j)   = tm%jx(ip1,j)   + a2*dum 
+   tm%jx(ip1,jp1) = tm%jx(ip1,jp1) + a3*dum 
+   tm%jx(i,jp1)   = tm%jx(i,jp1)   + a4*dum 
    dum = ele%vit(ipart,2) / (dx*dy) 
-   tm1%jy(i,j)     = tm1%jy(i,j)     + a1*dum  
-   tm1%jy(ip1,j)   = tm1%jy(ip1,j)   + a2*dum 
-   tm1%jy(ip1,j+1) = tm1%jy(ip1,jp1) + a3*dum 
-   tm1%jy(i,jp1)   = tm1%jy(i,jp1)   + a4*dum 
+   tm%jy(i,j)     = tm%jy(i,j)     + a1*dum  
+   tm%jy(ip1,j)   = tm%jy(ip1,j)   + a2*dum 
+   tm%jy(ip1,j+1) = tm%jy(ip1,jp1) + a3*dum 
+   tm%jy(i,jp1)   = tm%jy(i,jp1)   + a4*dum 
 end do
 
 do i=0,nx
-   tm1%jx(i,ny) = tm1%jx(i,0)
-   tm1%jy(i,ny) = tm1%jy(i,0)
+   tm%jx(i,ny) = tm%jx(i,0)
+   tm%jy(i,ny) = tm%jy(i,0)
 end do
 do j=0,ny
-   tm1%jx(nx,j) = tm1%jx(0,j)
-   tm1%jy(nx,j) = tm1%jy(0,j)
+   tm%jx(nx,j) = tm%jx(0,j)
+   tm%jy(nx,j) = tm%jy(0,j)
 end do
 
-
-do i=0,nx-1
-do j=0,ny
-   tm%jx(i,j) = 0.5 * (tm1%jx(i,j)+tm1%jx(i+1,j))
-end do
-end do
-
-do i=0,nx
-do j=0,ny-1
-   tm%jy(i,j) = 0.5 * (tm1%jy(i,j)+tm1%jy(i,j+1))
-end do
-end do
 
 end subroutine calcul_j_cic
 
