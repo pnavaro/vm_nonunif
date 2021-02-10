@@ -45,7 +45,6 @@ subroutine init_pstd(self, dimx, nx, dimy, ny)
    integer,  intent(in)     :: nx         !< x cells number
    integer,  intent(in)     :: ny         !< y cells number
 
-   integer                  :: error        !< error code
    real(8)                  :: dx           !< x space step
    real(8)                  :: dy           !< y space step
    real(8)                  :: kx0
