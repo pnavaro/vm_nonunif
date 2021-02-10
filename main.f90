@@ -48,7 +48,7 @@ call init_pstd( solver, dimx, nx, dimy, ny)
 
 call plasma( p ) !creation des particules
 call calcul_j_cic( p, f1 )
-dt = 0.001
+dt = 0.01
 
 do istep = 1, nstep
 
