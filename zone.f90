@@ -56,26 +56,26 @@ implicit none
 
 character(len=*) :: filename
 
-namelist/donnees/ dimx,  &      !dimensions du domaine
+namelist/donnees/ dimx,  &   !dimensions du domaine
                   dimy,  & 
-                    nx,  &      !nbre de pas
+                    nx,  &   !nbre de pas
                     ny,  &
-                   cfl,  &      !nbre de Courant
-                tfinal,  &      !duree maxi
-         nstepmax,  &   !nbre d'iterations maxi
-                nomcas,  &      !nom du cas ce calcul
-                 jname,  &      !calcul de j   
-       icrea,  &   !frequence d'emission des particules
-       idiag,  &   !frequence des diagnostics
-       bcname, &    !type de conditions limites
-       exext,    &   !champ electrique exterieur
-       eyext,    &   !champ electrique exterieur
-       bzext,  &   !champ magnetique exterieur
+                   cfl,  &   !nbre de Courant
+                tfinal,  &   !duree maxi
+              nstepmax,  &   !nbre d'iterations maxi
+                nomcas,  &   !nom du cas ce calcul
+                 jname,  &   !calcul de j   
+                 icrea,  &   !frequence d'emission des particules
+                 idiag,  &   !frequence des diagnostics
+                 bcname, &   !type de conditions limites
+                 exext,  &   !champ electrique exterieur
+                 eyext,  &   !champ electrique exterieur
+                 bzext,  &   !champ magnetique exterieur
                  charge, &   !charge d'une macroparticule
-                 masse,  &      !masse d'une macroparticule
-                     c,  &      !vitesse de la lumiere
-                    e0,  &      !permittivite du vide
-                 relativ        !calcul relativiste de la vitesse
+                 masse,  &   !masse d'une macroparticule
+                     c,  &   !vitesse de la lumiere
+                    e0,  &   !permittivite du vide
+                 relativ     !calcul relativiste de la vitesse
 
 !***Initialisation  des valeurs pas default
 
