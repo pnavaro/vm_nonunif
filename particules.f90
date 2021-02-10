@@ -289,15 +289,14 @@ end subroutine calcul_rho
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine calcul_j_cic( ele, tm )
+subroutine calcul_j_cic( ele, tm, tm1 )
 
 type(particle) :: ele
-type(mesh_fields) :: tm
+type(mesh_fields) :: tm, tm1
 real(kind=prec) :: a1, a2, a3, a4, dum, xp, yp
-real(kind=prec), dimension(0:nx,0:ny) :: jx, jy
 
-jx = 0.d0
-jy = 0.d0
+tm1%jx = 0.d0
+tm1%jy = 0.d0
 
 do ipart=1,nbpart
    i = ele%case(ipart,1)
@@ -310,42 +309,42 @@ do ipart=1,nbpart
    a3 = (xp-x(i)) * (yp-y(j)) * dum
    a4 = (x(i+1)-xp) * (yp-y(j)) * dum
    dum = ele%vit(ipart,1) / (hx(i)*hy(j)) !charge unite = 1
-   jx(i,j)     = jx(i,j)     + a1*dum  
-   jx(i+1,j)   = jx(i+1,j)   + a2*dum 
-   jx(i+1,j+1) = jx(i+1,j+1) + a3*dum 
-   jx(i,j+1)   = jx(i,j+1)   + a4*dum 
+   tm1%jx(i,j)     = tm1%jx(i,j)     + a1*dum  
+   tm1%jx(i+1,j)   = tm1%jx(i+1,j)   + a2*dum 
+   tm1%jx(i+1,j+1) = tm1%jx(i+1,j+1) + a3*dum 
+   tm1%jx(i,j+1)   = tm1%jx(i,j+1)   + a4*dum 
    dum = ele%vit(ipart,2) / (hx(i)*hy(j)) 
-   jy(i,j)     = jy(i,j)     + a1*dum  
-   jy(i+1,j)   = jy(i+1,j)   + a2*dum 
-   jy(i+1,j+1) = jy(i+1,j+1) + a3*dum 
-   jy(i,j+1)   = jy(i,j+1)   + a4*dum 
+   tm1%jy(i,j)     = tm1%jy(i,j)     + a1*dum  
+   tm1%jy(i+1,j)   = tm1%jy(i+1,j)   + a2*dum 
+   tm1%jy(i+1,j+1) = tm1%jy(i+1,j+1) + a3*dum 
+   tm1%jy(i,j+1)   = tm1%jy(i,j+1)   + a4*dum 
 end do
 
 if (bcname == 'period') then
    do i=0,nx
-      jx(i,0)  = jx(i,0) + jx(i,ny)
-      jx(i,ny) = jx(i,0)
-      jy(i,0)  = jy(i,0) + jy(i,ny)
-      jy(i,ny) = jy(i,0)
+      tm1%jx(i,0)  = tm1%jx(i,0) + tm1%jx(i,ny)
+      tm1%jx(i,ny) = tm1%jx(i,0)
+      tm1%jy(i,0)  = tm1%jy(i,0) + tm1%jy(i,ny)
+      tm1%jy(i,ny) = tm1%jy(i,0)
    end do
    do j=0,ny
-      jx(0,j)  = jx(0,j) + jx(nx,j)
-      jx(nx,j) = jx(0,j)
-      jy(0,j)  = jy(0,j) + jy(nx,j)
-      jy(nx,j) = jy(0,j)
+      tm1%jx(0,j)  = tm1%jx(0,j) + tm1%jx(nx,j)
+      tm1%jx(nx,j) = tm1%jx(0,j)
+      tm1%jy(0,j)  = tm1%jy(0,j) + tm1%jy(nx,j)
+      tm1%jy(nx,j) = tm1%jy(0,j)
    end do
 end if
 
 
 do i=0,nx-1
 do j=0,ny
-   tm%jx(i,j) = 0.5 * (jx(i,j)+jx(i+1,j))
+   tm%jx(i,j) = 0.5 * (tm1%jx(i,j)+tm1%jx(i+1,j))
 end do
 end do
 
 do i=0,nx
 do j=0,ny-1
-   tm%jy(i,j) = 0.5 * (jy(i,j)+jy(i,j+1))
+   tm%jy(i,j) = 0.5 * (tm1%jy(i,j)+tm1%jy(i,j+1))
 end do
 end do
 
