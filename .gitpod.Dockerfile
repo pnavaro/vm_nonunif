@@ -1,3 +1,3 @@
 FROM gitpod/workspace-full
 
-RUN brew install gfortran gnuplot
+RUN brew install gfortran gnuplot lapack
