@@ -1,6 +1,6 @@
 # Vlasov-Maxwell PIC solver 
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/pnavaro/vm_nonunif)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/pnavaro/vm_nonunif/tree/light)
 
 
 2 dimensions with non uniform cartesian mesh
