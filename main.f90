@@ -35,6 +35,8 @@ allocate(f0%r1(0:nx,0:ny))  !rho au temps n+1
 allocate(f1%ex(0:nx,0:ny)) !decales sur maillage de Maxwell
 allocate(f1%ey(0:nx,0:ny))
 allocate(f1%bz(0:nx,0:ny))
+allocate(f1%jx(0:nx,0:ny))
+allocate(f1%jy(0:nx,0:ny))
 
 time  = 0.d0
 iplot = 0
@@ -65,7 +67,7 @@ do istep = 1, nstep
    if (jname == 'jcico1') then
       call avancee_part( p, 0.5d0 )  ! x(n) --> x(n+1/2)
       call sortie_part( p )
-      call calcul_j_cic( p, f0 )
+      call calcul_j_cic( p, f0, f1 )
       call avancee_part( p, 0.5d0 )  ! x(n+1/2) -- x(n+1)
       call sortie_part( p )
    else if (jname == 'jcoco1') then
