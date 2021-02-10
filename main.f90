@@ -2,12 +2,13 @@ program VM_non_unif_2D
 
 use zone
 use particules
-use maxwell
+use pstd
 
 implicit none
 
-type(mesh_fields) :: f0, f1
+type(mesh_fields) :: f1
 type(particle) :: p
+type(maxwell_pstd) :: solver
 
 real(kind=prec) :: time
 integer :: istep
@@ -22,11 +23,6 @@ end do
 
 call readin( trim(argv) )
 
-allocate(f0%ex(0:nx-1,0:ny))
-allocate(f0%ey(0:nx,0:ny-1))
-allocate(f0%bz(0:nx-1,0:ny-1))
-allocate(f0%jx(0:nx-1,0:ny))
-allocate(f0%jy(0:nx,0:ny-1))
 allocate(f1%ex(0:nx,0:ny)) !decales sur maillage de Maxwell
 allocate(f1%ey(0:nx,0:ny))
 allocate(f1%bz(0:nx,0:ny))
@@ -41,35 +37,37 @@ if( nstep > nstepmax ) nstep = nstepmax
 
 istep = 1
 
-f0%ex = 0.d0; f0%ey = 0.d0; f0%bz = 0.d0
-do i=0,nx-1
+f1%ex = 0.d0; f1%ey = 0.d0; f1%bz = 0.d0
+do i=0,nx
    do j=0,ny
-      f0%ex(i,j) = alpha/kx * sin(kx*x(i))
+      f1%ex(i,j) = alpha/kx * sin(kx*x(i))
    enddo
 enddo
 
+call init_pstd( solver, dimx, nx, dimy, ny)
+
 call plasma( p ) !creation des particules
+call calcul_j_cic( p, f1 )
+dt = 0.001
 
 do istep = 1, nstep
 
-   if (istep > 1) call faraday( f0 )
+   if (istep > 1) call faraday_pstd( solver, f1%ex, f1%ey, f1%bz, 0.5*dt )
 
-   call decalage( f0, f1 )
    call interpol_eb( f1, p )
-
    call avancee_vitesse( p )
 
    call avancee_part( p, 0.5d0 )  ! x(n) --> x(n+1/2)
-   call calcul_j_cic( p, f0, f1 )
+   call calcul_j_cic( p, f1 )
    call avancee_part( p, 0.5d0 )  ! x(n+1/2) -- x(n+1)
         
-   call faraday( f0 )   !Calcul de B(n) --> B(n+1/2)
-   call ampere( f0 )    !Calcul de E(n) --> E(n+1)
+   call faraday_pstd( solver, f1%ex, f1%ey, f1%bz, 0.5*dt )
+   call ampere_pstd( solver, f1%ex, f1%ey, f1%bz, dt, f1%jx, f1%jy )
 
    time = time + dt
    print*,'time = ',time, ' nbpart = ', nbpart
 
-   call modeE( f0, istep, time )
+   call modeE( f1, istep, time )
 
 end do
 
