@@ -1,3 +1,4 @@
+image:
+  file: .gitpod.Dockerfile
 tasks:
-  - init: xargs -a packages.txt sudo apt-get install
-    command: make
+- command: make
